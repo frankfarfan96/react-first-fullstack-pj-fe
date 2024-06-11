@@ -6,6 +6,7 @@ export const api = axios.create({
     baseURL :"http://localhost:9192"
 })
 
+// This function adds a new room to the database
 export async function addRoom(photo, roomType, roomPrice) {
     
     const formData = new FormData();
