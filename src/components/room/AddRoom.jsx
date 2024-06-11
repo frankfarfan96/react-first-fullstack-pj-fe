@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { addRoom } from "../utils/ApiFunctions";
+import RoomTypeSelector from "../common/RoomTypeSelector";
+
 
 const AddRoom = () => {
-    const[newRoo, setNewRoom] = useState({
+    const[newRoom, setNewRoom] = useState({
         photo: null,
         roomType: "",
         roomPrice: ""
@@ -59,7 +61,7 @@ const AddRoom = () => {
 
     return (
         <>
-        <section className="containerm, mt-5 mb-5">
+        <section className="containerm mt-5 mb-5">
             <div className="row justify-content-center">
 
                 <div className="col-md-8 col-lg-6">
@@ -68,7 +70,9 @@ const AddRoom = () => {
                         <div className="mb-3">
                             <label htmlFor="roomType" className="form-label"> Room Type </label>
                             <div>
-
+                                <RoomTypeSelector 
+                                handleRoomInputChange={handleRoomInputChange}
+                                newRoom={newRoom} />
                             </div>
                         </div>
 
