@@ -7,7 +7,7 @@ const AddRoom = () => {
     const[newRoom, setNewRoom] = useState({
         photo: null,
         roomType: "",
-        roomPrice: ""
+        roomPrice: "0"
     });
 
     const[imagePreview, setImagePreview] = useState("");
@@ -20,15 +20,15 @@ const AddRoom = () => {
         let value = e.target.value;
 
         if(name === "roomPrice") {
-            
-            if(!isNaN(value)) {
-                value.parseInt(value);
-            } else {
-            value = "";
+
+            if(!isNaN(value) && value !== "") {
+                value = parseInt(value, 10);
+                setNewRoom({ ...newRoom, [name]: value });
             }
+        } else {
+            setNewRoom({...newRoom, [name]: value})
         }
 
-        setNewRoom({...newRoom, [name]: value, })
     }
 
     // Function to handle input photo in our form
@@ -44,7 +44,7 @@ const AddRoom = () => {
         try {
             const success = await addRoom(newRoom.photo, newRoom.roomType, newRoom.roomPrice);
             if(success !== undefined) {
-                setSuccessMessage("A new room was added to the database");
+                setSuccessMessage("A new room was added successfully !");
                 // Clean fetched data
                 setNewRoom({photo: null, roomType: "", roomPrice: ""});
                 setImagePreview("");
@@ -55,8 +55,12 @@ const AddRoom = () => {
 
         } catch(error) {
             setErrorMessage(error.message);
-
         }
+
+        setTimeout(() => {
+            setSuccessMessage("")
+            setErrorMessage("")
+        }, 3000)
     }
 
     return (
@@ -66,6 +70,22 @@ const AddRoom = () => {
 
                 <div className="col-md-8 col-lg-6">
                     <h2 className="mt-5 mb-2">Add a New Room</h2>
+                    {successMessage && (
+                        <div className="alert alert-success fade show">
+                            {successMessage}    
+                        </div>
+                    )}
+                    {errorMessage && (
+                        <div className="alert alert-danger fade show">
+                            {errorMessage}
+                        </div>
+                    )}
+
+
+
+
+
+
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="roomType" className="form-label"> Room Type </label>
