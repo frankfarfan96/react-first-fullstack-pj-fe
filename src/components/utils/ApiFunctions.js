@@ -26,7 +26,6 @@ export async function addRoom(photo, roomType, roomPrice) {
 }
 
 // This function is for popolete the select control with all the room types we have in our Db
-
 export async function getRoomTypes() {
     try {
         const response = await api.get("/rooms/room-types");
@@ -36,3 +35,15 @@ export async function getRoomTypes() {
         throw new Error("Error fetching room types");
     }
 }
+
+// This funtion gets all rooms from the DB
+export async function getAllRooms() {
+    try {
+        const result = await api.get("/rooms/all-rooms");
+        return result.data;
+
+    } catch(error) {
+        throw new Error("Error fetching rooms");
+    }
+}
+

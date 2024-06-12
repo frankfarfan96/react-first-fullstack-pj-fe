@@ -52,7 +52,7 @@ const AddRoom = () => {
             } else {
                 setErrorMessage("Error adding room");
             }
-
+f
         } catch(error) {
             setErrorMessage(error.message);
         }
@@ -80,11 +80,6 @@ const AddRoom = () => {
                             {errorMessage}
                         </div>
                     )}
-
-
-
-
-
 
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
