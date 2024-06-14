@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { getAllRooms } from "../utils/ApiFunctions";
+import { deleteRoom, getAllRooms } from "../utils/ApiFunctions";
 import { useEffect } from "react";
 import { Col } from "react-bootstrap";
 import RoomPaginator from "../common/RoomPaginator";
+import RoomFilter from "../common/RoomFilter";
 
 const ExistingRooms = () => {
     //variables
@@ -47,6 +48,25 @@ const ExistingRooms = () => {
     const handlePaginationClick = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
+
+    const handleDelete = async(roomId) => {
+        try {
+            const result = deleteRoom(roomId);
+            if(result === "") {
+                setSuccessMessage(`Room number ${roomId} was deleted`);
+                fetchRooms();
+            } else {
+                console.error(`Error deleting room : ${roomId}`)
+            }
+
+        } catch (error) {
+            setErrorMessage(erro.message);
+        }
+        setTimeout(() => {
+            setSuccessMessage("");
+            setErrorMessage("");
+        }, 3000)
+    }
     
     const calculateTotalPages = (filteredRooms, roomsPerPage, rooms) => {
         const totalRooms = filteredRooms.length > 0 ? filteredRooms.length : rooms.length;
@@ -83,11 +103,12 @@ const ExistingRooms = () => {
                     <tbody>
                         {currentRooms.map((room)=>(
                             <tr key={room.id} className="text-center">
+                                <td>{room.id}</td>
                                 <td>{room.roomType}</td>
                                 <td>{room.roomPrice}</td>
                                 <td>
-                                    <butto>View / Edit</butto>
-                                    <butto>Delete</butto>
+                                    <button>View / Edit</button>
+                                    <button>Delete</button>
                                 </td>
                             </tr>
                         ))}
