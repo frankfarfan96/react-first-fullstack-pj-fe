@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import { Col } from "react-bootstrap";
 import RoomPaginator from "../common/RoomPaginator";
 import RoomFilter from "../common/RoomFilter";
+import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ExistingRooms = () => {
     //variables
@@ -106,9 +108,20 @@ const ExistingRooms = () => {
                                 <td>{room.id}</td>
                                 <td>{room.roomType}</td>
                                 <td>{room.roomPrice}</td>
-                                <td>
-                                    <button>View / Edit</button>
-                                    <button>Delete</button>
+                                <td className="gap-2">
+                                    <Link to={`/edit-room/${room.id}`}>
+                                        <span className="btn btn-info">
+                                            <FaEye />
+                                        </span>
+                                        <span className="btn btn-warning">
+                                            <FaEdit />
+                                        </span>
+                                    </Link>
+                                    <button 
+                                    className="btn btn-danger btn-sm"
+                                    onClick={() => handleDelete(room.id)}>
+                                        <FaTrashAlt/>
+                                    </button>
                                 </td>
                             </tr>
                         ))}
