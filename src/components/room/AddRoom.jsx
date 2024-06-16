@@ -28,7 +28,6 @@ const AddRoom = () => {
         } else {
             setNewRoom({...newRoom, [name]: value})
         }
-
     }
 
     // Function to handle input photo in our form

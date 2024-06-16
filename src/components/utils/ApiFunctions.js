@@ -61,7 +61,7 @@ export async function deleteRoom(roomId) {
     }
 }
 
-
+// Function to update the room
 export async function updateRoom(roomId, roomData) {
     const formData = new FormData();
     formData.append("roomType", roomData.roomType);
@@ -73,6 +73,7 @@ export async function updateRoom(roomId, roomData) {
     return response;
 }
 
+// This function gets a room by the id 
 export async function getRoomById(roomId) {
     try {
         const result = await api.get(`/rooms/room/${roomId}`);
