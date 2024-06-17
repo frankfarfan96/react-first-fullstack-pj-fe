@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getRoomById, updateRoom } from "../utils/ApiFunctions";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import RoomTypeSelector from "../common/RoomTypeSelector";
 
 const EditRoom = () => {
@@ -28,6 +28,20 @@ const EditRoom = () => {
         setNewRoom({ ...room, [name]: value });
      
     }
+
+    useEffect(() => {
+        const fetchRoom = async () => {
+            try {
+                const roomData = await getRoomById(roomId);
+                setErrorMessage(roomData);
+                setImagePreview(roomData.photo);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        fetchRoom();
+    }, [roomId]) // when ever this roomId change, this function will start
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -112,9 +126,12 @@ const EditRoom = () => {
                             )}
                         </div>
 
-                        <div className="d-grid d-md-flex mt-2">
-                            <button className="btn btn-outline-primary ml-5">
-                                Save Room
+                        <div className="d-grid gap-2 d-md-flex mt-2">
+                            <Link to={"/existing-rooms"} className="btn btn-outline-info ml-5">
+                                back
+                            </Link>
+                            <button type="submit" className="btn btn-outline-primary ml-5">
+                                Edit Room
                             </button>
 
                         </div>
