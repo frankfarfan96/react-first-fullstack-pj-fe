@@ -5,9 +5,9 @@ import RoomTypeSelector from "../common/RoomTypeSelector";
 
 const EditRoom = () => {
     const[room, setRoom] = useState({
-        photo: null,
+        photo: "",
         roomType: "",
-        roomPrice: "0"
+        roomPrice: ""
     });
 
     const[imagePreview, setImagePreview] = useState("");
@@ -19,21 +19,21 @@ const EditRoom = () => {
     // Function to handle input photo in our form
     const handleImageChange = (e) => {
         const selectedImage = e.target.files[0];
-        setRoom({...room, photo: selectedImage})
-        setImagePreview(URL.createObjectURL(selectedImage))
+        setRoom({...room, photo: selectedImage});
+        setImagePreview(URL.createObjectURL(selectedImage));
     }
 
     const handleInputChange = (event) => {
         const {name, value} = event.target;
-        setNewRoom({ ...room, [name]: value });
+        setRoom({ ...room, [name]: value });
      
     }
 
     useEffect(() => {
         const fetchRoom = async () => {
             try {
-                const roomData = await getRoomById(roomId);
-                setErrorMessage(roomData);
+                const roomData = await getRoomById(roomId); 
+                setRoom(roomData);
                 setImagePreview(roomData.photo);
             } catch (error) {
                 console.error(error);
@@ -76,7 +76,7 @@ const EditRoom = () => {
             <div className="row justify-content-center">
 
                 <div className="col-md-8 col-lg-6">
-                    <h2 className="mt-5 mb-2">Add a New Room</h2>
+                    <h2 className="mt-5 mb-2">Edit Room</h2>
                     {successMessage && (
                         <div className="alert alert-success fade show">
                             {successMessage}    
@@ -119,12 +119,12 @@ const EditRoom = () => {
                             onChange={handleImageChange}
                             />
                             {imagePreview && (
-                                <img src={imagePreview}
+                                <img src={`data:image/jpeg;base64,${imagePreview}`}
                                 alt="Previw Room Photo"
                                 style={{maxWidth: "400px", maxHeight: "400px"}}
                                 className="mb-3" />
                             )}
-                        </div>
+                        </div>  
 
                         <div className="d-grid gap-2 d-md-flex mt-2">
                             <Link to={"/existing-rooms"} className="btn btn-outline-info ml-5">
