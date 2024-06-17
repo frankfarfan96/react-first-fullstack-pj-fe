@@ -22,7 +22,7 @@ function App() {
           <Route path='/add-room' element={<AddRoom />} />
         </Routes>
       </Router> 
-      <Footer />
+      <Footer /> 
     </main>
     </> 
   )
