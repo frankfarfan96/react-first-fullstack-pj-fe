@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllRooms } from "../utils/ApiFunctions";
-import { Card, Container } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import RoomCard from "./RoomCard";
 import RoomFilter from "../common/RoomFilter";
 import RoomPaginator from "../common/RoomPaginator";
@@ -18,7 +18,7 @@ const Room = () => {
         getAllRooms().then((data) => {
             setData(data);
             setFilteredData(data);
-            isLoading(false);
+            setIsLoading(false);
         }).catch((error) => {
             setError(error.message);
             setIsLoading(false);
@@ -71,4 +71,4 @@ const Room = () => {
     )
 }
 
-export default Room();
+export default Room;
