@@ -1,6 +1,7 @@
 import React from 'react';
 import AddRoom from './components/room/AddRoom'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import "/node_modules/bootstrap/dist/js/bootstrap.min.js"
 import ExistingRooms from './components/room/ExistingRooms';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import EditRoom from './components/room/EditRoom';
@@ -9,6 +10,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer'; 
 import RoomListing from './components/room/RoomListing';
 import Admin from './components/admin/Admin';
+import './index.css'
  
 function App() { 
 
