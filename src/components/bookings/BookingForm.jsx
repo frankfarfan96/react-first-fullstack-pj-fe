@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getRoomById } from "../utils/ApiFunctions";
-import { useParams } from "react-router-dom";
+import { bookRoom, getRoomById } from "../utils/ApiFunctions";
+import { useNavigate, useParams } from "react-router-dom";
+import moment from "moment";
 
 const BookingForm = () => {
     const[isValidated, setIsValidated] = useState(false);
@@ -21,6 +22,7 @@ const BookingForm = () => {
         roomPrice: ""
     });
     const{roomId} = useParams();
+    const {navigate} = useNavigate();
     
     const handleInputChange = (e) => {
         const {name,value} = e.target;
@@ -40,6 +42,59 @@ const BookingForm = () => {
     useEffect(() => {
         getRoomPriceById(roomId);
     }, [roomId]);
+
+    const calculatePayments = () => {
+        const checkInDate = moment(booking.checkInDate);
+        const checkOutDate = moment(booking.checkOutDate);
+        const diffInDays = checkOutDate.diff(checkInDate);
+        const price  = roomPrice ? roomPrice : 0;
+
+        return diffInDays * price;
+    } 
+
+    const isGuesCounttValid = () => {
+        const adultCount = parseInt(booking.numberOfAdults);
+        const childrenCount = parseInte(booking.numberOfChildren);
+        const totalCount = adultCount + childrenCount;
+
+        return totalCount >= 1 && adultCount >= 1;
+    }
+
+    const isCheckOutDateValid = () => {
+        if(!moment(booking.checkOutDate) .isSameOrAfter(moment(booking.checkInDate))) {
+            setErrorMessage("Check-out date must come before check-in date");
+            
+            return false;
+        } else {
+            setErrorMessage("");
+
+        }
+        return true;
+    }
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+
+        if(form.checkValidity === false || !isGuesCounttValid() || !isCheckOutDateValid()) {
+            e.stoPropagation();
+        } else {
+            setIsSubmitted(true);
+        }
+
+        setIsValidated(true);
+    }
+
+    const handleBooking = async() => {
+        try {
+            const confirmationCode = await bookRoom(roomId, booking);
+            setIsSubmitted(true);
+            navigate("/", {state: {message : confirmationCode}});
+        } catch (error) {
+            setErrorMessage(error.message);
+            navigate("/", {state: {error : errorMessage}});
+        }
+    }
 
     return (
         <div>
