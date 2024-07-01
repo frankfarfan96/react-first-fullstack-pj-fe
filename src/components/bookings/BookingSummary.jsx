@@ -1,6 +1,7 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const BookingSummary = ({booking, payment, isFormValid, onConfirm}) => {
     const checkInDate = moment(booking.checkInDate);
@@ -9,7 +10,7 @@ const BookingSummary = ({booking, payment, isFormValid, onConfirm}) => {
     const[isBookingConfirmed, setIsBookingConfirmed] = useState(false);
     const[isProccessingPayment, setIsProccessingPayment] = useState(false);
 
-    const {navigate} = useNavigate();
+    const navigate = useNavigate();
 
     const handleConfirmBooking = () => {
         setIsProccessingPayment(true);
@@ -22,14 +23,14 @@ const BookingSummary = ({booking, payment, isFormValid, onConfirm}) => {
 
     useEffect(() => {
         if(isBookingConfirmed) {
-            navigate("/booking-success")
+            navigate("/booking-success");
         }
     }, [isBookingConfirmed, navigate])
 
 
     return (
         <div className="card card-body mt-5">
-            <h4>Reservation Summary</h4>
+            <h4 className="card-title hotel-color">Reservation Summary</h4>
 
             <p>FullName : <strong>{booking.guestName}</strong></p>
             <p>Email : <strong>{booking.guestEmail}</strong></p>
@@ -38,10 +39,15 @@ const BookingSummary = ({booking, payment, isFormValid, onConfirm}) => {
             <p>Number of Days : <strong>{numOfDays}</strong></p>
 
             <div>
-                <h5>Number of Guest</h5>
-                <strong>Adult{booking.numberOfAdults > 1 ? "s" : ""} : {booking.numberOfAdults}</strong>
-                <strong>Children : {booking.numberOfChildren}</strong>
+                <h5 className="hotel-color">Number of Guest</h5>
+                <strong>
+                    Adult{booking.numOfAdults > 1 ? "s" : ""} : {booking.numOfAdults}
+                </strong>
+                <strong>
+                    <p>Children : {booking.numOfChildren}</p>
+                </strong>
             </div>
+
             {payment > 0 ? (
                 <>
                 <p>Total Payment : <strong>${payment}</strong></p>
@@ -54,9 +60,8 @@ const BookingSummary = ({booking, payment, isFormValid, onConfirm}) => {
                             <>
                                 <span className="spinner-border spinner-border-sm mr-2"
                                         role="status"
-                                        aria-hidden="true">
+                                        aria-hidden="true"></span>
                                 Booking Confirmed, redirecting to payment ...
-                                </span>
                             </>
                         ) : (
                             "Confirm Booking and proceed to payment"
