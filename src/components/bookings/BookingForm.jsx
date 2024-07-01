@@ -94,7 +94,8 @@ const BookingForm = () => {
             setIsSubmitted(true);
             navigate("/booking-success", {state: {message : confirmationCode}});
         } catch (error) {
-            setErrorMessage(error.message);
+            const errorMessage = error.message;
+            console.log(errorMessage);
             navigate("/booking-success", {state: {error : errorMessage}});
         }
     }
@@ -116,7 +117,8 @@ const BookingForm = () => {
                                         name="guestFullName"
                                         value={booking.guestFullName}
                                         placeholder="Enter your full name"
-                                        onChange={handleInputChange} />
+                                        onChange={handleInputChange} 
+                                        style={{width: "auto"}}/>
                                     <Form.Control.Feedback type="invalid">
                                         Please enter your fullname
                                     </Form.Control.Feedback>
@@ -131,13 +133,14 @@ const BookingForm = () => {
                                         name="guestEmail"
                                         value={booking.guestEmail}
                                         placeholder="Enter your email"
-                                        onChange={handleInputChange} />
+                                        onChange={handleInputChange}
+                                        style={{width: "auto"}} />
                                     <Form.Control.Feedback type="invalid">
                                         Please enter your email address
                                     </Form.Control.Feedback>
                                 </Form.Group>
 
-                                <fieldset style={{border: "2px"}}>
+                                <fieldset style={{border: "2px"}}> 
                                     <legend>Lodging period</legend>
                                     <div className="row">
 
@@ -218,7 +221,7 @@ const BookingForm = () => {
                             </Form>
                         </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                         {isSubmitted && (
                             <BookingSummary 
                                 booking={booking}
