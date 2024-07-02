@@ -6,7 +6,7 @@ const BookingsTable = ({bookingInfo, handleBookingCancellation}) => {
     const[filteredBookings, setFilteredBookings] = useState(bookingInfo);
 
     const filterBookings = (startDate, endDate) => {
-        let filtered = bookingsInfo;
+        let filtered = bookingInfo;
 
         if(startDate && endDate) {
             filtered = bookingInfo.filter((booking) => {
@@ -29,7 +29,7 @@ const BookingsTable = ({bookingInfo, handleBookingCancellation}) => {
 
     return(
     <section className="p-4">
-        <DateSlider onDateChange={filteredBookings} onFilterChange={filterBookings} />
+        <DateSlider onDateChange={filterBookings} onFilterChange={filterBookings} />
         <table>
             <thead>
                 <tr>
