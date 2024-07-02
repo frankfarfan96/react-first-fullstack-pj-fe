@@ -5,12 +5,13 @@ import BookingsTable from "./BookingsTable";
 
 const Bookings = () => {
     const[bookingInfo, setBookingInfo] = useState([]);
-    const[isLoading, setIsLoading] = useState(false);
+    const[isLoading, setIsLoading] = useState(true);
     const[error, setError] = useState("");
 
     useEffect(() => {
         setTimeout(() => {
             getAllBookings().then((data) => {
+                console.log(data);
                 setBookingInfo(data);
                 setIsLoading(false);
             }).catch((error) => {
@@ -22,7 +23,6 @@ const Bookings = () => {
 
     const handleBookingCancellation = async(bookingId) => {
         try {
-            
             await cancelBooking(bookingId);
             const data = await getAllBookings();
             setBookingInfo(data);

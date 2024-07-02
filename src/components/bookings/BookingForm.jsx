@@ -23,6 +23,7 @@ const BookingForm = () => {
         roomType: "",
         roomPrice: ""
     });
+
     const{roomId} = useParams();
     const navigate = useNavigate();
     
