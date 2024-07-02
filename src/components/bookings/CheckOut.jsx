@@ -3,6 +3,7 @@ import BookingForm from "./BookingForm";
 import { getRoomById } from "../utils/ApiFunctions";
 import { useParams } from "react-router-dom";
 import { FaCar, FaParking, FaTshirt, FaTv, FaUtensils, FaWifi, FaWineGlassAlt } from "react-icons/fa";
+import RoomCarousel from "../common/RoomCarousel";
 
 const CheckOut = () => {
     const[error, setError] = useState("");
@@ -71,12 +72,14 @@ const CheckOut = () => {
                             </div>
                         ) }
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-8">
                         <BookingForm />
                     </div>
-
                 </div>
             </section>
+            <div className="container">
+                    <RoomCarousel />
+            </div>
         </div>
     );
 }

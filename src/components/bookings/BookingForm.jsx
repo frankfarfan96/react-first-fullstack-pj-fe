@@ -145,7 +145,7 @@ const BookingForm = () => {
                                     <div className="row">
 
                                         <div className="col-6"> 
-                                            <Form.Label htmlFor="checkInDate" className="hotel-color">Check-In date :</Form.Label>
+                                            <Form.Label htmlFor="checkInDate" className="hotel-color">Check-In date</Form.Label>
                                             <FormControl
                                                 required
                                                 type="date"
@@ -160,7 +160,7 @@ const BookingForm = () => {
                                         </div> 
 
                                         <div className="col-6"> 
-                                        <Form.Label htmlFor="checkOutDate" className="hotel-color">Check-Out date :</Form.Label>
+                                        <Form.Label htmlFor="checkOutDate" className="hotel-color">Check-Out date</Form.Label>
                                             <FormControl
                                                 required
                                                 type="date"

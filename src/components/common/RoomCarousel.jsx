@@ -53,7 +53,7 @@ const RoomCarousel = () => {
                                             <Card.Title className="hotel-color">{room.roomType}</Card.Title>
                                             <Card.Title className="hotel-color">${room.roomPrice}/night</Card.Title>
                                             <div className="flex-shrink-0">
-                                                <Link className="btn btn-sm btn-hotel" to={`/book-room/${room.id}`}>
+                                                <Link to={`/book-room/${room.id}`} className="btn btn-hotel btn-sm">
                                                     Book Now
                                                 </Link>
                                             </div>
