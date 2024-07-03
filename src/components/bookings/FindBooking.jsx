@@ -4,6 +4,7 @@ import { cancelBooking, getBookingByConfirmationCode } from "../utils/ApiFunctio
 const FindBooking = () => {
     const[confirmationCode, setConfirmationCode] = useState("");
     const[error, setError] = useState("");
+    const[successMessage, setSuccessMessage] = useState("");
     const[isLoading, setIsLoading] = useState(false);
     const[bookingInfo, setBookingInfo] = useState({
         id: "",
@@ -64,12 +65,18 @@ const FindBooking = () => {
         try {
             await cancelBooking(bookingInfo.id);
             setIsDeleted(true);
+            setSuccessMessage(" Booking has been cancelled successfully! ")
             setBookingInfo(clearBookingInfo);
             setConfirmationCode("");
             setError("");
         } catch (error) {
             setError(error.message)
         }
+
+        setTimeout(() => {
+            setSuccessMessage("");
+            setIsDeleted(false);
+        }, 2000);
     }
 
     return (
@@ -124,7 +131,7 @@ const FindBooking = () => {
                  )}
 
                 {isDeleted && (
-                    <div className="alert alert-success mt-3" role="alert"> Booking has been cancelled successfully! </div>
+                    <div className="alert alert-success mt-3" role="alert">{successMessage}</div>
                 )}
             </div>
         </>
