@@ -49,26 +49,26 @@ const Registration = () => {
             <form onSubmit={handleRegistration}>
                 <div className="row mb-3">
                         <label htmlFor="firstName" className="col-sm-2 col-form-label"> First Name : </label>
-                        <div>
+                        <div className="col-sm-10">
                             <input 
                                 id="firstName"
                                 name="firstName"
                                 type="firstName"
                                 className="form-control"
-                                value={login.firstName}
+                                value={registration.firstName}
                                 onChange={handleInputChange}/>
                             
                         </div>
                     </div>
                 <div className="row mb-3">
                     <label htmlFor="lastName" className="col-sm-2 col-form-label"> Last Name : </label>
-                    <div>
+                    <div className="col-sm-10">
                         <input 
                             id="lastName"
                             name="lastName"
                             type="lastName"
                             className="form-control"
-                            value={login.lastName}
+                            value={registration.lastName}
                             onChange={handleInputChange}/>
                         
                     </div>
@@ -76,13 +76,13 @@ const Registration = () => {
 
                 <div className="row mb-3">
                     <label htmlFor="email" className="col-sm-2 col-form-label"> Email </label>
-                    <div>
+                    <div className="col-sm-10">
                         <input 
                             id="email"
                             name="email"
                             type="email"
                             className="form-control"
-                            value={login.email}
+                            value={registration.email}
                             onChange={handleInputChange}/>
                         
                     </div>
@@ -90,29 +90,26 @@ const Registration = () => {
                     
                 <div className="row mb-3">
                     <label htmlFor="password" className="col-sm-2 col-form-label"> Password </label>
-                    <div>
+                    <div className="col-sm-10">
                         <input 
                             id="password"
                             name="password"
                             type="password"
                             className="form-control"
-                            value={login.password}
+                            value={registration.password}
                             onChange={handleInputChange}/>
                         
                     </div>
                 </div>
 
-                <div className="mb-3">
-                    <button 
-                        type="submit" 
-                        className="btn btn-hotel"
-                        style={{marginRight:"10px"}}>
-                            Login
-                    </button>
-                    <span style={{marginLeft:"10px"}}>
-                        Don't have an account yet ? <Link to={"/register"}></Link>
-                    </span>
-                </div>
+				<div className="mb-3">
+					<button type="submit" className="btn btn-hotel" style={{ marginRight: "10px" }}>
+						Register
+					</button>
+					<span style={{ marginLeft: "10px" }}>
+						Already have an account? <Link to={"/login"}>Login</Link>
+					</span>
+				</div>
             </form>
 
             
