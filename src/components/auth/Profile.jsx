@@ -1,4 +1,5 @@
 import React from "react";
+import { deleteUser, getUserProfile } from "../utils/ApiFunctions";
 
 const Profile = () => {
     const[user, setUser] = useState({
@@ -12,10 +13,13 @@ const Profile = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
+	const userId = localStorage.getItem("userId");
+	const token = localStorage.getItem("token");
+
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const userData = await getUser(userId, token)
+				const userData = await getUserProfile(userId, token)
 				setUser(userData)
 			} catch (error) {
 				console.error(error)
