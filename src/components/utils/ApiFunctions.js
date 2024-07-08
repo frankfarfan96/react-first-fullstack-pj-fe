@@ -193,7 +193,7 @@ export async function loginUser(login) {
 
 export async function getUserProfile(userId, token) {
     try {
-        const response = await api.get(`users/profile/${userId}`, {
+        const response = await api.get(`/users/${userId}`, {
             headers : getHeader()
         });
 

@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 const Logout = () => {
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
-    
     const handleLogout = () => {
         auth.handleLogout();
         window.location.reload();

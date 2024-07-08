@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react"; 
 import { NavLink, Link } from "react-router-dom";
-import Logout from "../auth/Logout";
+import Logout from "../auth/Logout"; 
 import { AuthContext } from "../auth/AuthProvider";
 
 const Navbar = () => {
@@ -11,9 +11,10 @@ const Navbar = () => {
     const handleAccountClick = () => {
         setShowAccount(!showAccount);
     }
-
-    const isLoggedIn = user !== null;
+      
     
+	const isLoggedIn = localStorage.getItem("token")
+    const isLogged = user !== null;
     const userRole = localStorage.getItem("userRole");
 
 
@@ -43,7 +44,7 @@ const Navbar = () => {
                             </NavLink> 
                         </li>
 
-                        {isLoggedIn && userRole === "ROLE_ADMIN" && (
+                        {isLogged && userRole.includes("ROLE_ADMIN") && (
                             <li className="nav-item">
                                 <NavLink className="nav-link" aria-current="page" to={"/admin"}>
                                     Admin
@@ -70,10 +71,8 @@ const Navbar = () => {
                             </a>
                             <ul className={`dropdown-menu ${showAccount ? "show" : ""}`}
                                 aria-labelledby="navbarDropdown">
-                                {isLoggedIn ? (
-                                    <li>
+                                {isLogged ? (
                                         <Logout />
-                                    </li> 
                                 ) : (
                                     <li>
                                         <Link to={"/login"} className="dropdown-item">

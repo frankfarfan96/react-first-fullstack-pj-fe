@@ -1,6 +1,7 @@
 import React from 'react';
 import AddRoom from './components/room/AddRoom'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 
 import "/node_modules/bootstrap/dist/js/bootstrap.min.js"
 import ExistingRooms from './components/room/ExistingRooms';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'

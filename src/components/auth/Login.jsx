@@ -12,7 +12,7 @@ const Login = () => {
     const navigate = useNavigate();
     const auth = useAuth();
     const location = useLocation();
-    const redirectUrl = location.state?.path || "//";
+    const redirectUrl = location.state?.path || "/";
 
     const handleInputChange = (e) => {
         setLogin({...login, [e.target.name] : e.target.value});

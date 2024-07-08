@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { deleteUser, getUserProfile } from "../utils/ApiFunctions";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
     const[user, setUser] = useState({
@@ -7,7 +8,7 @@ const Profile = () => {
 		email: "",
 		firstName: "",
 		lastName: "",
-		roles: [{ id: "", name: "" }]
+		role: [{ id: "", name: "" }]
     });
     const [message, setMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -20,6 +21,7 @@ const Profile = () => {
 		const fetchUser = async () => {
 			try {
 				const userData = await getUserProfile(userId, token)
+                console.log(userData);
 				setUser(userData)
 			} catch (error) {
 				console.error(error)
@@ -80,7 +82,7 @@ const Profile = () => {
                                             <strong>Email : </strong> {user.email}
                                         </div>
                                         <div className="mb-2">
-                                            <strong>Role : </strong> {user.roles[0].name}
+                                            <strong>Role : </strong> 
                                         </div>
                                         <button className="btn btn-danger" onClick={handleDeleteAccount}>
                                             Delete Account
