@@ -9,7 +9,7 @@ const Login = () => {
         email: "",
         password: ""
     });
-    const navigete = useNavigate();
+    const navigate = useNavigate();
     
     const handleInputChange = (e) => {
         setLogin({...login, [e.target.name] : e.target.value});
@@ -26,7 +26,7 @@ const Login = () => {
             localStorage.setItem("token", token);
             localStorage.setItem("userId", decodedToken.sub);
             localStorage.setItem("userRole", decodedToken.roles.join(","));
-            navigete();
+            navigate();
             window.location.reload();
         } else {
             setErrorMessage("Invalid username or password. Please try again.")
