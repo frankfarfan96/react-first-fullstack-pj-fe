@@ -25,7 +25,9 @@ export async function addRoom(photo, roomType, roomPrice) {
     formData.append("roomType", roomType);
     formData.append("roomPrice", roomPrice);
    
-    const response = await api.post("/rooms/add/new-room", formData);
+    const response = await api.post("/rooms/add/new-room", formData, {
+        headers : getHeader()
+    });
 
     if(response.status === 201) {
         return true;
@@ -112,6 +114,7 @@ export async function bookRoom(roomId, booking) {
 // This function gets all bookings from the database
 export async function getAllBookings() {
     try {
+
         const result = await api.get("/bookings/all-bookings");
 
         return result.data;
@@ -213,4 +216,17 @@ export async function deleteUser(userId) {
     } catch (error) {
         return error.message;
     }
+}
+
+// This is the function to get user bookings by the user id 
+export async function getBookingsByUserId(userId, token) {
+	try {
+		const response = await api.get(`/bookings/user/${userId}/bookings`, {
+			headers: getHeader()
+		})
+		return response.data
+	} catch (error) {
+		console.error("Error fetching bookings:", error.message)
+		throw new Error("Failed to fetch bookings")
+	}
 }
