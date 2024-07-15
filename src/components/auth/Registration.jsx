@@ -12,7 +12,7 @@ const Registration = () => {
     const[errorMessage, setErrorMessage] = useState("");
     const[successMessage, setSuccessMessage] = useState("");
 
-    const handleInputChange = () => {
+    const handleInputChange = (e) => {
         setRegistration({...registration, [e.target.name] : e.target.value});
     }
 
