@@ -1,5 +1,6 @@
 // file to create functions that we interact with our server BE
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 //create our URL
 export const api = axios.create({
@@ -64,7 +65,9 @@ export async function getAllRooms() {
 // This function delete a room by id
 export async function deleteRoom(roomId) {
     try {
-        const result = await api.delete((`/rooms/delete/room/${roomId}`));
+        const result = await api.delete((`/rooms/delete/room/${roomId}`), {
+            headers : getHeader()
+        }); 
 
         return result.data;
 
@@ -80,7 +83,9 @@ export async function updateRoom(roomId, roomData) {
     formData.append("roomPrice", roomData.roomPrice);
     formData.append("photo", roomData.photo);
 
-    const response = await api.put(`/rooms/update/${roomId}`, formData);
+    const response = await api.put(`/rooms/update/${roomId}`, formData, {
+        headers : getHeader()
+    });
 
     return response;
 }
@@ -141,7 +146,9 @@ export async function getBookingByConfirmationCode(confirmationCode) {
 // This function cancels booking
 export async function cancelBooking(bookingId) {
     try {
-        const result = await api.delete(`/bookings/booking/${bookingId}/delete`);
+        const result = await api.delete(`/bookings/booking/${bookingId}/delete`, formData, {
+            headers : getHeader()
+        });
 
         return result.data;
     } catch (error) {
